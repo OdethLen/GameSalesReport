@@ -112,5 +112,57 @@ namespace GameSalesReport
         {
 
         }
+
+        private void btnTreeView_Click(object sender, EventArgs e)
+        {
+
+            treeViewData.Nodes.Clear();
+
+            // Índices de columnas relevantes
+            int idxName = 0;
+            int idxPlatform = 1;
+            int idxYear = 2;
+            int idxGenre = 3;
+            int idxPublisher = 4;
+
+            foreach (DataGridViewRow row in dgvData.Rows)
+            {
+                if (row.IsNewRow)
+                    continue;
+
+                string publisher = row.Cells[idxPublisher].Value?.ToString() ?? "Unknown Publisher";
+                string genre = row.Cells[idxGenre].Value?.ToString() ?? "Unknown Genre";
+                string platform = row.Cells[idxPlatform].Value?.ToString() ?? "Unknown Platform";
+                string year = row.Cells[idxYear].Value?.ToString() ?? "Unknown Year";
+                string gameName = row.Cells[idxName].Value?.ToString() ?? "Unknown Game";
+
+                // Nivel 1: Publisher
+                TreeNode publisherNode = treeViewData.Nodes.Cast<TreeNode>()
+                    .FirstOrDefault(n => n.Text == publisher) ?? treeViewData.Nodes.Add(publisher);
+
+                // Nivel 2: Genre
+                TreeNode genreNode = publisherNode.Nodes.Cast<TreeNode>()
+                    .FirstOrDefault(n => n.Text == genre) ?? publisherNode.Nodes.Add(genre);
+
+                // Nivel 3: Platform
+                TreeNode platformNode = genreNode.Nodes.Cast<TreeNode>()
+                    .FirstOrDefault(n => n.Text == platform) ?? genreNode.Nodes.Add(platform);
+
+                // Nivel 4: Year
+                TreeNode yearNode = platformNode.Nodes.Cast<TreeNode>()
+                    .FirstOrDefault(n => n.Text == year) ?? platformNode.Nodes.Add(year);
+
+                // Nivel 5: Game Name
+                yearNode.Nodes.Add(gameName);
+            }
+
+            treeViewData.ExpandAll(); // Opcional: para mostrarlo expandido desde el inic
+            MessageBox.Show("¡TreeView generado correctamente!");
+        }
+
+        private void treeViewData_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
     }
 }

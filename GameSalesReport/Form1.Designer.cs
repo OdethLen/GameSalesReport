@@ -32,6 +32,8 @@
             dgvData = new DataGridView();
             btnPie = new Button();
             formsPlotPie = new ScottPlot.WinForms.FormsPlot();
+            treeViewData = new TreeView();
+            btnTreeView = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             SuspendLayout();
             // 
@@ -73,11 +75,31 @@
             formsPlotPie.TabIndex = 3;
             formsPlotPie.Load += formsPlotPie_Load;
             // 
+            // treeViewData
+            // 
+            treeViewData.Location = new Point(592, 290);
+            treeViewData.Name = "treeViewData";
+            treeViewData.Size = new Size(226, 271);
+            treeViewData.TabIndex = 4;
+            treeViewData.AfterSelect += treeViewData_AfterSelect;
+            // 
+            // btnTreeView
+            // 
+            btnTreeView.Location = new Point(657, 261);
+            btnTreeView.Name = "btnTreeView";
+            btnTreeView.Size = new Size(75, 23);
+            btnTreeView.TabIndex = 5;
+            btnTreeView.Text = "Tree";
+            btnTreeView.UseVisualStyleBackColor = true;
+            btnTreeView.Click += btnTreeView_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(868, 573);
+            Controls.Add(btnTreeView);
+            Controls.Add(treeViewData);
             Controls.Add(formsPlotPie);
             Controls.Add(btnPie);
             Controls.Add(dgvData);
@@ -94,5 +116,7 @@
         private DataGridView dgvData;
         private Button btnPie;
         private ScottPlot.WinForms.FormsPlot formsPlotPie;
+        private TreeView treeViewData;
+        private Button btnTreeView;
     }
 }
